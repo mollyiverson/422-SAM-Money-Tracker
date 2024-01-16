@@ -7,7 +7,8 @@
 2. [Team Members](#team-members)
 
 ## Project Description
-This is a budget-tracking Desktop Java GUI application used to learn SOFTWARE TESTING. We did not spend much time creating the ideal UI and software. We created unit, integration, and system testing. The user can enter a monthly income and make a budget for various categories such as food, entertainment, transportation, savings, etc. They can record purchases, and the application will notify the user if they are over budget. Features are tentative at the moment. 
+This is a budget-tracking Desktop Java GUI application used to learn SOFTWARE TESTING. We did not spend much time creating the ideal UI and software. We created unit, integration, and system tests.<br /><br />
+The user can enter a monthly income and make a budget for various categories such as food, entertainment, transportation, savings, etc. They can record purchases, and the application will notify the user if they are over budget. 
 
 ## Team Members
 ### Anya Castillo
