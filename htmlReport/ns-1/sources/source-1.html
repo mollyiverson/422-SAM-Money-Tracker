@@ -1,0 +1,719 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > MoneyManagerGUI</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">GUI</a>
+</div>
+
+<h1>Coverage Summary for Class: MoneyManagerGUI (GUI)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MoneyManagerGUI</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.2%
+  </span>
+  <span class="absValue">
+    (78/96)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.9%
+  </span>
+  <span class="absValue">
+    (187/195)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MoneyManagerGUI$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MoneyManagerGUI$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MoneyManagerGUI$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MoneyManagerGUI$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.7%
+  </span>
+  <span class="absValue">
+    (85/104)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.3%
+  </span>
+  <span class="absValue">
+    (210/218)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package GUI;
+&nbsp;
+&nbsp;import java.awt.event.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Objects;
+&nbsp;import javax.swing.*;
+&nbsp;
+&nbsp;import backend.*;
+&nbsp;
+&nbsp;import java.awt.event.FocusAdapter;
+&nbsp;import java.awt.event.FocusEvent;
+&nbsp;import java.util.*;
+&nbsp;import javax.swing.table.DefaultTableModel;
+&nbsp;
+&nbsp;import static javax.swing.JOptionPane.showMessageDialog;
+&nbsp;import static org.apache.groovy.parser.antlr4.util.StringUtils.isEmpty;
+&nbsp;
+&nbsp;public class MoneyManagerGUI extends JFrame {
+<b class="fc">&nbsp;    private final ArrayList&lt;String&gt; goals = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    private final ArrayList&lt;String&gt; transactions = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    public double costValue = 0.0;</b>
+<b class="fc">&nbsp;    public String itemTransaction = &quot;&quot;;</b>
+<b class="fc">&nbsp;    public String categoryTransaction = &quot;&quot;;</b>
+<b class="fc">&nbsp;    public String dateTransaction = &quot;&quot;;</b>
+&nbsp;    private JPanel panel1;
+&nbsp;    private JTabbedPane tabbedPane;
+&nbsp;    private JPanel monthlyExpensesPanel;
+&nbsp;    private JPanel savingGoalPanel;
+&nbsp;    private JPanel monthlySummaryPanel;
+&nbsp;    private JMenuBar menuBar;
+&nbsp;    private JMenu file;
+&nbsp;    private JMenuItem undo;
+&nbsp;    private JMenuItem redo;
+&nbsp;    private JLabel totalIncome;
+&nbsp;    private JLabel rentMortgage;
+&nbsp;    private JLabel autoExpenses;
+&nbsp;    private JLabel utilities;
+&nbsp;    private JLabel transportation;
+&nbsp;    private JLabel groceries;
+&nbsp;    private JLabel entertainment;
+&nbsp;    private JLabel debt;
+&nbsp;    private JLabel savings;
+&nbsp;    private JLabel investments;
+&nbsp;    private JLabel medical;
+&nbsp;    private JLabel other;
+&nbsp;    private JLabel diningOut;
+&nbsp;    private JLabel personalCare;
+&nbsp;    private JLabel totalExpenses;
+&nbsp;    private JLabel excess;
+&nbsp;    private JLabel excessAnswer;
+&nbsp;    private JLabel expensesAnswer;
+&nbsp;    private JTextField rentField;
+&nbsp;    private JTextField autoField;
+&nbsp;    private JTextField utilitiesField;
+&nbsp;    private JTextField transportationField;
+&nbsp;    private JTextField groceriesField;
+&nbsp;    private JTextField entertainmentField;
+&nbsp;    private JTextField debtField;
+&nbsp;    private JTextField savingsField;
+&nbsp;    private JTextField investmentsField;
+&nbsp;    private JTextField medicalField;
+&nbsp;    private JTextField otherField;
+&nbsp;    private JTextField diningField;
+&nbsp;    private JTextField personalField;
+&nbsp;    private JTextField incomeField;
+&nbsp;    private JButton calculateBut;
+&nbsp;    private JPanel savingsGoalPanel;
+&nbsp;    private JTextField goalField;
+&nbsp;    private JLabel savingsGoal;
+&nbsp;    private JTextField itemField;
+&nbsp;    private JLabel itemSaving;
+&nbsp;    private JLabel timeFrame;
+&nbsp;    private JTextField timeField;
+&nbsp;    private JLabel attainable;
+&nbsp;    private JLabel attainableField;
+&nbsp;    private JLabel excessField;
+&nbsp;    private JButton calculateGoal;
+&nbsp;    private JLabel attainableLabel;
+&nbsp;    private JButton goalClear;
+&nbsp;    private JButton undoButton;
+&nbsp;    private JButton redoButton;
+&nbsp;    private JTable goalTable;
+&nbsp;    private JPanel spendingTrackerPanel;
+&nbsp;    private JButton addPurchaseButton;
+&nbsp;    private JTextField itemNameField;
+&nbsp;    private JTextField costField;
+&nbsp;    private JTextField dateField;
+&nbsp;    private JComboBox categoryOptions;
+&nbsp;    private JLabel itemName;
+&nbsp;    private JLabel cost;
+&nbsp;    private JLabel date;
+&nbsp;    private JLabel category;
+&nbsp;    private JComboBox prioritySelect;
+&nbsp;    private JTable transactionTable;
+&nbsp;    private JComboBox stateField;
+&nbsp;    private JLabel stateLabel;
+&nbsp;    private JTextField householdSizeValue;
+&nbsp;    private JLabel householdSizeLabel;
+&nbsp;    private JLabel fSEligibleLabel;
+&nbsp;    private JLabel fSEligibleValue;
+&nbsp;    private JCheckBox taxCheckBox;
+&nbsp;    private JLabel taxLabel;
+&nbsp;    private JLabel taxDetails;
+&nbsp;    private JButton clearTracker;
+&nbsp;    private String goalPrevValueHolder;
+<b class="fc">&nbsp;    private String goalPriority = &quot;&quot;;   //gets set to the priority when goal calculated</b>
+<b class="fc">&nbsp;    private double excessValue = 0.0;   //gets set to the excess when goal calculated</b>
+&nbsp;
+<b class="fc">&nbsp;    private double goalValue = 0.0;     //gets set to the goal when goal calculated</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    private double timeValue = 0.0;     //gets set to the time (days) when goal calculated</b>
+&nbsp;
+<b class="fc">&nbsp;    public MoneyManagerGUI() {</b>
+<b class="fc">&nbsp;            setScreen();</b>
+<b class="fc">&nbsp;            setNames();</b>
+&nbsp;        //Action performed for when the monthly expenses button is pressed
+<b class="fc">&nbsp;        calculateBut.addActionListener(e -&gt; {</b>
+&nbsp;            // if input is valid, converts to doubles and calculates the total expenses/month and the excess money after expenses are paid.
+<b class="pc">&nbsp;            if (!InputHandler.isValidDouble(rentField.getText()) || !InputHandler.isValidDouble(autoField.getText()) || !InputHandler.isValidDouble(utilitiesField.getText()) || !InputHandler.isValidDouble(transportationField.getText()) || !InputHandler.isValidDouble(groceriesField.getText()) || !InputHandler.isValidDouble(entertainmentField.getText()) || InputHandler.isValidDouble(debtField.getText()) || !InputHandler.isValidDouble(savingsField.getText()) || !InputHandler.isValidDouble(investmentsField.getText()) || !InputHandler.isValidDouble(medicalField.getText()) || !InputHandler.isValidDouble(diningField.getText()) || !InputHandler.isValidDouble(personalField.getText()) || !InputHandler.isValidDouble(otherField.getText())) {</b>
+<b class="fc">&nbsp;                setMonthlyValuesZero();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            setIncomeAndExcessInfo();</b>
+&nbsp;        });
+&nbsp;
+&nbsp;        //actions performed when calculate in savings goal is pressed
+<b class="fc">&nbsp;        calculateGoal.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                if (setGoalValues()) {</b>
+<b class="fc">&nbsp;                    calculateGoalButton();</b>
+<b class="fc">&nbsp;                    loadFromGoalArray();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        });
+&nbsp;        //actions performed when clear button in goals in pressed
+<b class="fc">&nbsp;        goalClear.addActionListener(e -&gt; clearGoalFields());</b>
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        dateField.addFocusListener(new FocusAdapter() {</b>
+&nbsp;            // Makes default date format &quot;MM/DD/YYYY&quot; disappear when user starts to type
+&nbsp;            public void focusGained(FocusEvent e) {
+<b class="fc">&nbsp;                super.focusGained(e);</b>
+<b class="pc">&nbsp;                if (dateField.getText().equals(&quot;MM/DD/YYYY&quot;)) {</b>
+<b class="fc">&nbsp;                    dateField.setText(&quot;&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            // Shows default date format &quot;MM/DD/YYYY&quot; in date field when user hasn&#39;t inputted anything
+&nbsp;            public void focusLost(FocusEvent e) {
+<b class="fc">&nbsp;                super.focusLost(e);</b>
+<b class="fc">&nbsp;                if (dateField.getText().isEmpty()) {</b>
+<b class="fc">&nbsp;                    dateField.setText(&quot;MM/DD/YYYY&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        });
+<b class="fc">&nbsp;        addPurchaseButton.addActionListener(new ActionListener() {</b>
+&nbsp;            // Adds a new transaction to the transaction table
+&nbsp;            public void actionPerformed(ActionEvent e) {
+&nbsp;                // Validate fields
+<b class="fc">&nbsp;                if (setTransactionValues()) {</b>
+<b class="fc">&nbsp;                    addTransaction();</b>
+<b class="fc">&nbsp;                    loadFromTransactionArray();</b>
+<b class="fc">&nbsp;                    clearTransactionFields();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+&nbsp;        // Clears spending tracker when clear button is pressed by user
+<b class="fc">&nbsp;        clearTracker.addActionListener(new ActionListener() {</b>
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                clearTransactionFields();</b>
+<b class="fc">&nbsp;                transactions.clear();</b>
+<b class="fc">&nbsp;                String[] columns = {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;};</b>
+<b class="fc">&nbsp;                String[][] data = {{&quot;Name&quot;, &quot;Cost&quot;, &quot;Date&quot;, &quot;Category&quot;}};</b>
+<b class="fc">&nbsp;                DefaultTableModel model = new DefaultTableModel(data, columns);</b>
+<b class="fc">&nbsp;                transactionTable.setModel(model);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Makes a string with all the information from the goal page.
+&nbsp;     * Checks if inputs are valid
+&nbsp;     *
+&nbsp;     * @return string with information. empty string if a field is empty.
+&nbsp;     */
+&nbsp;    public String makeGoalString() {
+<b class="fc">&nbsp;        String goal = goalField.getText();</b>
+<b class="fc">&nbsp;        String excess = excessField.getText();</b>
+<b class="fc">&nbsp;        String time = timeField.getText();</b>
+<b class="fc">&nbsp;        String name = itemField.getText();</b>
+<b class="pc">&nbsp;        if (Objects.equals(goal, &quot;&quot;) || Objects.equals(excess, &quot;&quot;) || Objects.equals(time, &quot;&quot;) || Objects.equals(name, &quot;&quot;)) {</b>
+<b class="nc">&nbsp;            return &quot;&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return name + &quot;,&quot; + goal + &quot;,&quot; + excess + &quot;,&quot; + time;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Makes a string with all the information from transaction
+&nbsp;     * Checks if inputs are valid
+&nbsp;     *
+&nbsp;     * @return string with information. empty string if a field is empty.
+&nbsp;     */
+&nbsp;    public String makeTransactionString() {
+<b class="fc">&nbsp;        String name = itemNameField.getText();</b>
+<b class="fc">&nbsp;        String category = Objects.requireNonNull(categoryOptions.getSelectedItem()).toString();</b>
+&nbsp;        String cost;
+&nbsp;
+<b class="pc">&nbsp;        if (taxCheckBox.isSelected()) {</b>
+<b class="nc">&nbsp;            TaxCalculator taxCalculator = new TaxCalculator();</b>
+&nbsp;            // Calculates the tax if selected by the user
+<b class="nc">&nbsp;            double initialCost = Double.parseDouble(costField.getText());</b>
+<b class="nc">&nbsp;            costValue = taxCalculator.calculateTotalCost(initialCost, Objects.requireNonNull(stateField.getSelectedItem()).toString(), Objects.requireNonNull(categoryOptions.getSelectedItem()).toString());</b>
+<b class="nc">&nbsp;            cost = InputHandler.formatDoubles(costValue);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            cost = costField.getText();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String date = dateField.getText();</b>
+<b class="pc">&nbsp;        if (Objects.equals(name, &quot;&quot;) || Objects.equals(category, &quot;&quot;) || Objects.equals(cost, &quot;&quot;) || Objects.equals(date, &quot;&quot;)) {</b>
+<b class="nc">&nbsp;            return &quot;&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return name + &quot;,&quot; + cost + &quot;,&quot; + date + &quot;,&quot; + category;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * clears all fields when the clear button is pressed
+&nbsp;     */
+&nbsp;    private void clearGoalFields() {
+<b class="fc">&nbsp;        goalField.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        timeField.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        itemField.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        attainableLabel.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        goalValue = 0.0;</b>
+<b class="fc">&nbsp;        goalPriority = &quot;&quot;;</b>
+<b class="fc">&nbsp;        timeValue = 0.0;</b>
+<b class="fc">&nbsp;        goals.clear();</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] columns = {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;};</b>
+<b class="fc">&nbsp;        String[][] data = {{&quot;Name&quot;, &quot;Goal&quot;, &quot;Excess&quot;, &quot;Time&quot;, &quot;Attainable?&quot;}};</b>
+<b class="fc">&nbsp;        DefaultTableModel model = new DefaultTableModel(data, columns);</b>
+<b class="fc">&nbsp;        goalTable.setModel(model);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * clears all transaction fields when the clear button is pressed
+&nbsp;     */
+&nbsp;    private void clearTransactionFields() {
+<b class="fc">&nbsp;        costField.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        dateField.setText(&quot;MM/DD/YYYY&quot;);</b>
+<b class="fc">&nbsp;        itemNameField.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        attainableLabel.setText(&quot;&quot;);</b>
+<b class="fc">&nbsp;        costValue = 0.0;</b>
+<b class="fc">&nbsp;        itemTransaction = &quot;&quot;;</b>
+<b class="fc">&nbsp;        categoryTransaction = &quot;&quot;;</b>
+<b class="fc">&nbsp;        String dateTransaction = &quot;&quot;;</b>
+<b class="fc">&nbsp;        this.taxCheckBox.setSelected(false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Runs the calculation methods when the calculate button in savings goal is pressed.
+&nbsp;     * If the goal is unattainable, gives advice on how to save based on goal priority
+&nbsp;     */
+&nbsp;    private void calculateGoalButton() {
+<b class="fc">&nbsp;        String goalString = makeGoalString();</b>
+<b class="pc">&nbsp;        if (!Objects.equals(goalString, &quot;&quot;)) {</b>
+<b class="fc">&nbsp;            double value = MoneyManagerEngine.attainability(goalString);</b>
+<b class="fc">&nbsp;            String attainableString = MoneyManagerEngine.getAttainable(goalString, value);</b>
+<b class="fc">&nbsp;            if (value == -1) {</b>
+<b class="fc">&nbsp;                double[] calcValues = MoneyManagerEngine.savingAdvice(excessValue, goalValue, goalPriority);</b>
+<b class="fc">&nbsp;                String advice = &quot;. Try saving $&quot; + InputHandler.formatDoubles(calcValues[0]) + &quot; per day for &quot; + InputHandler.formatDoubles(calcValues[1]) + &quot; days&quot;;</b>
+<b class="fc">&nbsp;                attainableString += advice;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            attainableLabel.setText(attainableString);</b>
+<b class="fc">&nbsp;            goalString += &quot;,&quot; + attainableString;</b>
+<b class="fc">&nbsp;            goals.add(goalString);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Runs the calculation methods when the calculate button in savings goal is pressed.
+&nbsp;     * If the goal is unattainable, gives advice on how to save based on goal priority
+&nbsp;     */
+&nbsp;    public void addTransaction() {
+<b class="fc">&nbsp;        String transactionString = makeTransactionString();</b>
+<b class="pc">&nbsp;        if (!Objects.equals(transactionString, &quot;&quot;)) {</b>
+<b class="fc">&nbsp;            transactions.add(transactionString);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * displays all the goals from the array
+&nbsp;     */
+&nbsp;    private void loadFromGoalArray() {
+<b class="fc">&nbsp;        String[] columns = {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;};</b>
+<b class="fc">&nbsp;        String[][] data = {{&quot;Name&quot;, &quot;Goal&quot;, &quot;Excess&quot;, &quot;Time&quot;, &quot;Attainable?&quot;}};</b>
+<b class="fc">&nbsp;        for (String goal : goals) {</b>
+<b class="fc">&nbsp;            String[] arrOfGoalStr = goal.split(&quot;,&quot;, 5);</b>
+<b class="fc">&nbsp;            data = InputHandler.appendToArray(data, arrOfGoalStr);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        DefaultTableModel model = new DefaultTableModel(data, columns);</b>
+<b class="fc">&nbsp;        goalTable.setModel(model);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * displays all the transactions from the array
+&nbsp;     */
+&nbsp;    private void loadFromTransactionArray() {
+<b class="fc">&nbsp;        String[] columns = {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;};</b>
+<b class="fc">&nbsp;        String[][] data = {{&quot;Name&quot;, &quot;Cost&quot;, &quot;Date&quot;, &quot;Category&quot;}};</b>
+<b class="fc">&nbsp;        for (String purchase : transactions) {</b>
+<b class="fc">&nbsp;            String[] arrOfTransactionStr = purchase.split(&quot;,&quot;, 4);</b>
+<b class="fc">&nbsp;            data = InputHandler.appendToArray(data, arrOfTransactionStr);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        DefaultTableModel model = new DefaultTableModel(data, columns);</b>
+<b class="fc">&nbsp;        transactionTable.setModel(model);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * sets the variables for the goal.
+&nbsp;     *
+&nbsp;     * @return false if any of the values aren&#39;t valid, true if they all are.
+&nbsp;     */
+&nbsp;    private boolean setGoalValues() {
+<b class="fc">&nbsp;        boolean returnValue = false;</b>
+<b class="fc">&nbsp;        goalPriority = (String) prioritySelect.getSelectedItem();</b>
+<b class="fc">&nbsp;        if (InputHandler.isValidDouble(goalField.getText())  &amp;&amp;</b>
+<b class="fc">&nbsp;                InputHandler.isValidDouble(timeField.getText())) {</b>
+<b class="fc">&nbsp;            goalValue = Double.parseDouble(goalField.getText());</b>
+<b class="fc">&nbsp;            excessValue = Double.parseDouble(excessField.getText());</b>
+<b class="fc">&nbsp;            timeValue = Double.parseDouble(timeField.getText());</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="fc">&nbsp;            clearGoalFields();</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * sets the variables for the transaction.
+&nbsp;     *
+&nbsp;     * @return false if any of the values aren&#39;t valid, true if they all are.
+&nbsp;     */
+&nbsp;    private boolean setTransactionValues() {
+<b class="fc">&nbsp;        if (InputHandler.isValidDouble(costField.getText())) {</b>
+<b class="fc">&nbsp;            costValue = Double.parseDouble(costField.getText());</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            clearTransactionFields();</b>
+<b class="fc">&nbsp;            showMessageDialog(null, &quot;Please enter an integer or double for cost&quot;);</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String item = itemNameField.getText();</b>
+<b class="fc">&nbsp;        if (!Objects.equals(item, &quot;&quot;)) {</b>
+<b class="fc">&nbsp;            itemTransaction = itemNameField.getText();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            clearTransactionFields();</b>
+<b class="fc">&nbsp;            showMessageDialog(null, &quot;Please enter item name&quot;);</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Date date = InputHandler.isValidDate(dateField.getText());</b>
+<b class="fc">&nbsp;        if (date != null) {</b>
+<b class="fc">&nbsp;            dateTransaction = dateField.getText();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            clearTransactionFields();</b>
+<b class="fc">&nbsp;            showMessageDialog(null, &quot;Date is not in correct format&quot;);</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * sets all monthly value boxes to zero of empty
+&nbsp;     *
+&nbsp;     */
+&nbsp;    private void setMonthlyValuesZero() {
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(rentField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(autoField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(personalField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(otherField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(medicalField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(diningField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(investmentsField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(savingsField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(debtField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(entertainmentField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(groceriesField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(transportationField);</b>
+<b class="fc">&nbsp;        MoneyManagerEngine.toZero(utilitiesField);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void setScreen(){
+<b class="fc">&nbsp;        this.setContentPane(this.panel1);</b>
+<b class="fc">&nbsp;        this.setTitle(&quot;Money Manager GUI&quot;);</b>
+<b class="fc">&nbsp;        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</b>
+<b class="fc">&nbsp;        this.setSize(1200, 600);</b>
+<b class="fc">&nbsp;        this.setLocationRelativeTo(null);</b>
+<b class="fc">&nbsp;        this.setVisible(true);</b>
+<b class="fc">&nbsp;        this.stateField.setSelectedItem(&quot;WA&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void setNames()
+&nbsp;    {
+&nbsp;        //InputHandler.isValidDouble(otherField.getText()))
+<b class="fc">&nbsp;        incomeField.setName(&quot;incomeField&quot;);</b>
+<b class="fc">&nbsp;        rentField.setName(&quot;rentField&quot;);</b>
+<b class="fc">&nbsp;        diningField.setName(&quot;diningField&quot;);</b>
+<b class="fc">&nbsp;        autoField.setName(&quot;autoField&quot;);</b>
+<b class="fc">&nbsp;        debtField.setName(&quot;debtField&quot;);</b>
+<b class="fc">&nbsp;        otherField.setName(&quot;otherField&quot;);</b>
+<b class="fc">&nbsp;        personalField.setName(&quot;personalField&quot;);</b>
+<b class="fc">&nbsp;        medicalField.setName(&quot;medicalField&quot;);</b>
+<b class="fc">&nbsp;        diningField.setName(&quot;diningField&quot;);</b>
+<b class="fc">&nbsp;        savingsField.setName(&quot;savingsField&quot;);</b>
+<b class="fc">&nbsp;        investmentsField.setName(&quot;investmentsField&quot;);</b>
+<b class="fc">&nbsp;        transportationField.setName(&quot;transportationField&quot;);</b>
+<b class="fc">&nbsp;        groceriesField.setName(&quot;groceriesField&quot;);</b>
+<b class="fc">&nbsp;        entertainmentField.setName(&quot;entertainmentField&quot;);</b>
+<b class="fc">&nbsp;        utilitiesField.setName(&quot;utilitiesField&quot;);</b>
+<b class="fc">&nbsp;        calculateBut.setName(&quot;calculateBut&quot;);</b>
+<b class="fc">&nbsp;        excessField.setName(&quot;excessAnswer&quot;);</b>
+<b class="fc">&nbsp;        expensesAnswer.setName(&quot;expensesAnswer&quot;);</b>
+<b class="fc">&nbsp;        timeField.setName(&quot;timeField&quot;);</b>
+<b class="fc">&nbsp;        goalField.setName(&quot;goalField&quot;);</b>
+<b class="fc">&nbsp;        itemField.setName(&quot;itemField&quot;);</b>
+<b class="fc">&nbsp;        calculateGoal.setName(&quot;calculateGoal&quot;);</b>
+<b class="fc">&nbsp;        tabbedPane.setName(&quot;tabbedPane&quot;);</b>
+<b class="fc">&nbsp;        goalTable.setName(&quot;goalTable&quot;);</b>
+<b class="fc">&nbsp;        goalClear.setName(&quot;goalClear&quot;);</b>
+<b class="fc">&nbsp;        costField.setName(&quot;costField&quot;);</b>
+<b class="fc">&nbsp;        itemNameField.setName(&quot;itemNameField&quot;);</b>
+<b class="fc">&nbsp;        dateField.setName(&quot;dateField&quot;);</b>
+<b class="fc">&nbsp;        addPurchaseButton.setName(&quot;addPurchaseButton&quot;);</b>
+<b class="fc">&nbsp;        transactionTable.setName(&quot;transactionTable&quot;);</b>
+<b class="fc">&nbsp;        categoryOptions.setName(&quot;categoryOptions&quot;);</b>
+<b class="fc">&nbsp;        clearTracker.setName(&quot;clearTracker&quot;);</b>
+<b class="fc">&nbsp;        attainableLabel.setName(&quot;attainableLabel&quot;);</b>
+<b class="fc">&nbsp;        householdSizeValue.setName(&quot;householdSizeValue&quot;);</b>
+<b class="fc">&nbsp;        fSEligibleValue.setName(&quot;fSEligibleValue&quot;);</b>
+<b class="fc">&nbsp;        stateField.setName(&quot;stateField&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks input is valid and updates the users on food stamp eligibility.
+&nbsp;     */
+&nbsp;    private void setFoodStampInfo(){
+<b class="fc">&nbsp;        if (InputHandler.validHouseholdSize(householdSizeValue.getText())) {</b>
+<b class="fc">&nbsp;            FoodStampCalculator foodStampCalculator = new FoodStampCalculator();</b>
+<b class="pc">&nbsp;            if (foodStampCalculator.eligibleForFoodStamps(Objects.requireNonNull(stateField.getSelectedItem()).toString(), Double.parseDouble(incomeField.getText()), Integer.parseInt(householdSizeValue.getText()))) {</b>
+<b class="nc">&nbsp;                fSEligibleValue.setText(&quot;yes&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                fSEligibleValue.setText(&quot;no&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            fSEligibleValue.setText(&quot;Please ensure the household size is larger than zero&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks input is valid and updates the user on the income and excess money.
+&nbsp;     */
+&nbsp;    private void setIncomeAndExcessInfo(){
+<b class="fc">&nbsp;        if (InputHandler.isValidDouble(rentField.getText()) &amp;&amp; InputHandler.isValidDouble(autoField.getText()) &amp;&amp; InputHandler.isValidDouble(utilitiesField.getText()) &amp;&amp; InputHandler.isValidDouble(transportationField.getText()) &amp;&amp; InputHandler.isValidDouble(groceriesField.getText()) &amp;&amp; InputHandler.isValidDouble(entertainmentField.getText()) &amp;&amp; InputHandler.isValidDouble(debtField.getText()) &amp;&amp; InputHandler.isValidDouble(savingsField.getText()) &amp;&amp; InputHandler.isValidDouble(investmentsField.getText()) &amp;&amp; InputHandler.isValidDouble(medicalField.getText()) &amp;&amp; InputHandler.isValidDouble(diningField.getText()) &amp;&amp; InputHandler.isValidDouble(personalField.getText()) &amp;&amp; InputHandler.isValidDouble(otherField.getText())) {</b>
+<b class="fc">&nbsp;            double[] expenses = {Double.parseDouble(rentField.getText()), Double.parseDouble(autoField.getText()), Double.parseDouble(utilitiesField.getText()), Double.parseDouble(transportationField.getText()), Double.parseDouble(groceriesField.getText()), Double.parseDouble(entertainmentField.getText()), Double.parseDouble(debtField.getText()), Double.parseDouble(savingsField.getText()), Double.parseDouble(investmentsField.getText()), Double.parseDouble(medicalField.getText()), Double.parseDouble(diningField.getText()), Double.parseDouble(personalField.getText()), Double.parseDouble(otherField.getText())};</b>
+<b class="fc">&nbsp;            expensesAnswer.setText(InputHandler.formatDoubles(MoneyManagerEngine.totalExpenses(expenses)));</b>
+&nbsp;            // check for valid income value
+<b class="fc">&nbsp;            if (InputHandler.isValidDouble(incomeField.getText())) {</b>
+<b class="fc">&nbsp;                excessField.setText(InputHandler.formatDoubles(MoneyManagerEngine.excess(Double.parseDouble(incomeField.getText()), expenses)));</b>
+&nbsp;                // Check food stamp eligibility
+<b class="fc">&nbsp;                setFoodStampInfo();</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                expensesAnswer.setText(&quot;Please ensure all values are numbers&quot;);</b>
+<b class="fc">&nbsp;                excessField.setText(&quot;&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            expensesAnswer.setText(&quot;Please ensure all values are numbers&quot;);</b>
+<b class="fc">&nbsp;            excessField.setText(&quot;&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-30 13:42</div>
+</div>
+</body>
+</html>
