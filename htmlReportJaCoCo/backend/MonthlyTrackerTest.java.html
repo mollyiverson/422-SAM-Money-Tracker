@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthlyTrackerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in MoneyManager Coverage Results</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">MonthlyTrackerTest.java</span></div><h1>MonthlyTrackerTest.java</h1><pre class="source lang-java linenums">package backend;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+<span class="fc" id="L9">class MonthlyTrackerTest {</span>
+
+    @Test
+    void totalExpenses() {
+<span class="fc" id="L13">        double[] expenses = {2000, 300, 75, 100, 300, 50, 200, 100, 50, 25, 50, 50, 25.34};</span>
+<span class="fc" id="L14">        double expected = 3325.34;</span>
+<span class="fc" id="L15">        double actual = MoneyManagerEngine.totalExpenses(expenses);</span>
+<span class="fc" id="L16">        assertEquals(expected, actual);</span>
+<span class="fc" id="L17">    }</span>
+
+    @Test
+    void totalExpensesNoCosts() {
+<span class="fc" id="L21">        double[] expenses = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};</span>
+<span class="fc" id="L22">        double expected = 0;</span>
+<span class="fc" id="L23">        double actual = MoneyManagerEngine.totalExpenses(expenses);</span>
+<span class="fc" id="L24">        assertEquals(expected, actual);</span>
+<span class="fc" id="L25">    }</span>
+
+    @Test
+    void totalExpensesEmpty() {
+<span class="fc" id="L29">        double[] expenses = {};</span>
+<span class="fc" id="L30">        double expected = 0;</span>
+<span class="fc" id="L31">        double actual = MoneyManagerEngine.totalExpenses(expenses);</span>
+<span class="fc" id="L32">        assertEquals(expected, actual);</span>
+<span class="fc" id="L33">    }</span>
+
+    @Test
+    void excessLessThanIncome() {
+<span class="fc" id="L37">        double[] expenses = {2000, 300, 75, 100, 300, 50, 200, 100, 50, 25, 50, 50, 25.34};</span>
+<span class="fc" id="L38">        double income = 5650;</span>
+<span class="fc" id="L39">        double actual = MoneyManagerEngine.excess(income, expenses);</span>
+<span class="fc" id="L40">        double expected = 2324.66;</span>
+<span class="fc" id="L41">        assertEquals(expected, actual);</span>
+<span class="fc" id="L42">    }</span>
+
+    @Test
+    void excessMoreThanIncome() {
+<span class="fc" id="L46">        double[] expenses = {2000, 300, 75, 100, 300, 50, 200, 100, 50, 25, 50, 50, 25.34};</span>
+<span class="fc" id="L47">        double income = 1000;</span>
+<span class="fc" id="L48">        double actual = MoneyManagerEngine.excess(income, expenses);</span>
+<span class="fc" id="L49">        double expected = -2325.34;</span>
+<span class="fc" id="L50">        assertEquals(expected, actual);</span>
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

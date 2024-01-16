@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FoodStampCalculatorSpyTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in MoneyManager Coverage Results</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">FoodStampCalculatorSpyTest.java</span></div><h1>FoodStampCalculatorSpyTest.java</h1><pre class="source lang-java linenums">package backend;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+<span class="fc" id="L9">class FoodStampCalculatorSpyTest {</span>
+
+<span class="fc" id="L11">    FoodStampCalculator foodStampCalculator = new FoodStampCalculator(true);</span>
+<span class="fc" id="L12">    FoodStampCalculator foodStampCalculatorSpy = spy(foodStampCalculator);</span>
+
+    @BeforeEach
+    void setUp(){
+<span class="fc" id="L16">        when(foodStampCalculatorSpy.addFoodStampRates(anyString())).thenAnswer(I -&gt; {</span>
+<span class="fc" id="L17">            foodStampCalculatorSpy.addRate(&quot;NE&quot;, 1.65);</span>
+<span class="fc" id="L18">            foodStampCalculatorSpy.addRate(&quot;OR&quot;, 2);</span>
+<span class="fc" id="L19">            foodStampCalculatorSpy.addRate(&quot;RI&quot;, 1.85);</span>
+<span class="fc" id="L20">            foodStampCalculatorSpy.addRate(&quot;KS&quot;, 1.3);</span>
+<span class="fc" id="L21">            foodStampCalculatorSpy.addRate(&quot;HI&quot;, 2.0);</span>
+<span class="fc" id="L22">            foodStampCalculatorSpy.addRate(&quot;AK&quot;, 1.3);</span>
+<span class="fc" id="L23">            return true;</span>
+        });
+<span class="fc" id="L25">        foodStampCalculatorSpy.addFoodStampRates(&quot;path&quot;);</span>
+<span class="fc" id="L26">    }</span>
+
+    @Test
+    void eligibleForFoodStamps130Eligible() {
+<span class="fc" id="L30">        assertTrue(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;KS&quot;, 1000, 2));</span>
+<span class="fc" id="L31">    }</span>
+
+    @Test
+    void eligibleForFoodStamps130NotEligible() {
+<span class="fc" id="L35">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;KS&quot;, 2250, 2));</span>
+<span class="fc" id="L36">    }</span>
+
+    @Test
+    void eligibleForFoodStamps185Eligible() {
+<span class="fc" id="L40">        assertTrue(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;RI&quot;, 1000, 3));</span>
+<span class="fc" id="L41">    }</span>
+
+    @Test
+    void eligibleForFoodStamps185NotEligible() {
+<span class="fc" id="L45">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;RI&quot;, 3950.75, 3));</span>
+<span class="fc" id="L46">    }</span>
+
+    @Test
+    void eligibleForFoodStamps200Eligible() {
+<span class="fc" id="L50">        assertTrue(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;OR&quot;, 3000, 3));</span>
+<span class="fc" id="L51">    }</span>
+
+    @Test
+    void eligibleForFoodStamps200NotEligible() {
+<span class="fc" id="L55">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;OR&quot;, 5000, 3));</span>
+<span class="fc" id="L56">    }</span>
+
+    @Test
+    void eligibleForFoodStamps165Eligible() {
+<span class="fc" id="L60">        assertTrue(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;NE&quot;, 3000, 3));</span>
+<span class="fc" id="L61">    }</span>
+
+    @Test
+    void eligibleForFoodStamps165NotEligible() {
+<span class="fc" id="L65">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;NE&quot;, 5000, 3));</span>
+<span class="fc" id="L66">    }</span>
+    @Test
+    void eligibleForFoodStampsHawaiiEligible(){
+<span class="fc" id="L69">        assertTrue(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;HI&quot;, 4000, 3));</span>
+<span class="fc" id="L70">    }</span>
+
+    @Test
+    void eligibleForFoodStampsHawaiiNotEligible(){
+<span class="fc" id="L74">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;HI&quot;, 5000, 3));</span>
+<span class="fc" id="L75">    }</span>
+    @Test
+    void eligibleForFoodStampsAlaskaEligible(){
+<span class="fc" id="L78">        assertTrue(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;AK&quot;, 3365, 3));</span>
+<span class="fc" id="L79">    }</span>
+
+    @Test
+    void eligibleForFoodStampsAlaskaNotEligible(){
+<span class="fc" id="L83">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;AK&quot;, 3366, 3));</span>
+<span class="fc" id="L84">    }</span>
+
+    @Test
+    void invalidState(){
+<span class="fc" id="L88">        assertFalse(foodStampCalculatorSpy.eligibleForFoodStamps(&quot;XY&quot;, 3366, 3));</span>
+<span class="fc" id="L89">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

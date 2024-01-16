@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FoodStampCalculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in MoneyManager Coverage Results</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">FoodStampCalculator.java</span></div><h1>FoodStampCalculator.java</h1><pre class="source lang-java linenums">package backend;
+
+import com.opencsv.CSVReader;
+
+import java.io.*;
+import java.util.*;
+
+public class FoodStampCalculator {
+
+<span class="fc" id="L10">    private HashMap&lt;String, Double&gt; foodStampRates = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L11">    private final int FEDERAL_POVERTY_LEVEL_BASE = 14580;</span>
+<span class="fc" id="L12">    private final int ALASKA_POVERTY_LEVEL_BASE = 18210;</span>
+<span class="fc" id="L13">    private final int HAWAII_POVERTY_LEVEL_BASE = 16770;</span>
+<span class="fc" id="L14">    private final int FEDERAL_POVERTY_LEVEL_EXTRA = 5140;</span>
+<span class="fc" id="L15">    private final int ALASKA_POVERTY_LEVEL_EXTRA = 6430;</span>
+<span class="fc" id="L16">    private final int HAWAII_POVERTY_LEVEL_EXTRA = 5910;</span>
+
+    /**
+     * Creates new instance of FoodStampCalculator
+     */
+<span class="fc" id="L21">    public FoodStampCalculator(){</span>
+<span class="fc" id="L22">        addFoodStampRates(&quot;MoneyManager/FoodStampsRate.csv&quot;);</span>
+<span class="fc" id="L23">    }</span>
+
+<span class="fc" id="L25">    public FoodStampCalculator(String pathname){</span>
+<span class="fc" id="L26">        addFoodStampRates(pathname);</span>
+<span class="fc" id="L27">    }</span>
+<span class="fc" id="L28">    public FoodStampCalculator(boolean forTesting){</span>
+<span class="fc" id="L29">    }</span>
+
+    public HashMap&lt;String, Double&gt; getFoodStampRates() {
+<span class="fc" id="L32">        return foodStampRates;</span>
+    }
+
+    /**
+     * Populates the hashtable with states and the percentage of the poverty level
+     * that makes one eligible for food stamps.
+     * @param pathname the path to the file that the states and their rates are found.
+     * @return true if the rates are added successfullly and false if and they weren't
+     */
+    public boolean addFoodStampRates(String pathname){
+        try{
+<span class="fc" id="L43">            CSVReader reader = new CSVReader(new FileReader(new File(pathname)));</span>
+<span class="fc" id="L44">            List&lt;String[]&gt; lines = reader.readAll();</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            for(String[] line : lines){</span>
+<span class="fc" id="L46">                foodStampRates.put(line[0], Double.parseDouble(line[1]));</span>
+<span class="fc" id="L47">            }</span>
+<span class="fc" id="L48">            return true;</span>
+<span class="fc" id="L49">        } catch (Exception e){</span>
+<span class="fc" id="L50">            return false;</span>
+        }
+    }
+
+    /**
+     * Checks if the user is eligible for food stamps or not based on the household size, the state, and the monthly income.
+     * @param state The state where the user is from.
+     * @param income The monthly income of the user.
+     * @param household The number of people in the household.
+     * @return True if the user is eligible for food stamps, false if they are not.
+     */
+    public boolean eligibleForFoodStamps(String state, double income, int household) {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(this.foodStampRates.containsKey(state)){</span>
+<span class="fc" id="L63">            double rate = this.foodStampRates.get(state);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            if(state.equals(&quot;AK&quot;)){</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">                return income &lt;= ((double) (((household - 1) * ALASKA_POVERTY_LEVEL_EXTRA) + ALASKA_POVERTY_LEVEL_BASE) / 12) * rate;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            }else if(state.equals(&quot;HI&quot;)){</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                return income &lt;= ((double) (((household - 1) * HAWAII_POVERTY_LEVEL_EXTRA) + HAWAII_POVERTY_LEVEL_BASE) / 12) * rate;</span>
+            }else{
+<span class="fc bfc" id="L69" title="All 2 branches covered.">                return income &lt;= ((double) (((household - 1) * FEDERAL_POVERTY_LEVEL_EXTRA) + FEDERAL_POVERTY_LEVEL_BASE) / 12) * rate;</span>
+            }
+        }
+<span class="fc" id="L72">        return false;</span>
+    }
+
+    public void addRate(String key, double value){
+<span class="fc" id="L76">        this.foodStampRates.put(key, value);</span>
+<span class="fc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

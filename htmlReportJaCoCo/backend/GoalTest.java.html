@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GoalTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in MoneyManager Coverage Results</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">GoalTest.java</span></div><h1>GoalTest.java</h1><pre class="source lang-java linenums">package backend;
+
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+<span class="fc" id="L8">public class GoalTest {</span>
+    @Test
+    void testAttainable(){
+<span class="fc" id="L11">        String goal = &quot;TV, 100, 1000, 200&quot;;</span>
+<span class="fc" id="L12">        double actual = MoneyManagerEngine.attainability(goal);</span>
+<span class="fc" id="L13">        double expected = .5;</span>
+<span class="fc" id="L14">        assertEquals(actual, expected);</span>
+<span class="fc" id="L15">    }</span>
+    @Test
+    void testNotAttainable(){
+<span class="fc" id="L18">        String goal = &quot;TV, 100, 1000, 1&quot;;</span>
+<span class="fc" id="L19">        double actual = MoneyManagerEngine.attainability(goal);</span>
+<span class="fc" id="L20">        double expected = -1;</span>
+<span class="fc" id="L21">        assertEquals(actual, expected);</span>
+
+<span class="fc" id="L23">    }</span>
+
+    @Test
+    void testHighSavingAdvice(){
+<span class="fc" id="L27">        double[] actual = MoneyManagerEngine.savingAdvice(1000, 2000, &quot;High&quot;);</span>
+<span class="fc" id="L28">        double[] expected = {33.33, 60};</span>
+<span class="fc" id="L29">        assertEquals(actual[0], expected[0], .1);</span>
+<span class="fc" id="L30">        assertEquals(actual[1], expected[1], .1);</span>
+<span class="fc" id="L31">    }</span>
+
+    @Test
+    void testMediumSavingAdvice(){
+<span class="fc" id="L35">        double[] actual = MoneyManagerEngine.savingAdvice(1000, 2000, &quot;Medium&quot;);</span>
+<span class="fc" id="L36">        double[] expected = {16.67, 119.98};</span>
+<span class="fc" id="L37">        assertEquals(actual[0], expected[0], .1);</span>
+<span class="fc" id="L38">        assertEquals(actual[1], expected[1], .1);</span>
+<span class="fc" id="L39">    }</span>
+
+    @Test
+    void testLowSavingAdvice(){
+<span class="fc" id="L43">        double[] actual = MoneyManagerEngine.savingAdvice(1000, 2000, &quot;Low&quot;);</span>
+<span class="fc" id="L44">        double[] expected = {11.11, 180.02};</span>
+<span class="fc" id="L45">        assertEquals(actual[0], expected[0], .1);</span>
+<span class="fc" id="L46">        assertEquals(actual[1], expected[1], .1);</span>
+<span class="fc" id="L47">    }</span>
+
+    @Test
+    void testGetNotAttainable(){
+<span class="fc" id="L51">        String actual = MoneyManagerEngine.getAttainable(&quot;100&quot;, -1);</span>
+<span class="fc" id="L52">        String expected = &quot;Savings goal is unattainable&quot;;</span>
+<span class="fc" id="L53">        assertEquals(actual, expected);</span>
+<span class="fc" id="L54">    }</span>
+
+    @Test
+    void testGetAttainable(){
+<span class="fc" id="L58">        String actual = MoneyManagerEngine.getAttainable(&quot;1000&quot;, 17.898);</span>
+<span class="fc" id="L59">        String expected = &quot;Save $&quot; + InputHandler.formatDoubles(17.90) + &quot; daily to reach goal&quot;;;</span>
+<span class="fc" id="L60">        assertEquals(actual, expected);</span>
+<span class="fc" id="L61">    }</span>
+
+    @Test
+    void toZero(){
+<span class="fc" id="L65">        JTextField field = new JTextField();</span>
+<span class="fc" id="L66">        MoneyManagerEngine.toZero(field);</span>
+<span class="fc" id="L67">        assertEquals(field.getText(), &quot;0&quot;);</span>
+<span class="fc" id="L68">        field.setText(&quot;2&quot;);</span>
+<span class="fc" id="L69">        MoneyManagerEngine.toZero(field);</span>
+<span class="fc" id="L70">        assertEquals(field.getText(), &quot;2&quot;);</span>
+
+<span class="fc" id="L72">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

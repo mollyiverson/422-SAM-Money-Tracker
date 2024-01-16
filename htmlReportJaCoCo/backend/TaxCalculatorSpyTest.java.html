@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TaxCalculatorSpyTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in MoneyManager Coverage Results</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">TaxCalculatorSpyTest.java</span></div><h1>TaxCalculatorSpyTest.java</h1><pre class="source lang-java linenums">package backend;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+<span class="fc" id="L11">public class TaxCalculatorSpyTest {</span>
+<span class="fc" id="L12">    TaxCalculator taxCalculator = new TaxCalculator(true);</span>
+<span class="fc" id="L13">    TaxCalculator taxCalculatorSpy = spy(taxCalculator);</span>
+
+    @BeforeEach
+    void setUp(){
+<span class="fc" id="L17">        when(taxCalculatorSpy.addTaxValues(anyString())).thenAnswer(I -&gt; {</span>
+<span class="fc" id="L18">            taxCalculatorSpy.addSalesRate(&quot;WA&quot;, 6.5);</span>
+<span class="fc" id="L19">            taxCalculatorSpy.addGroceryRate(&quot;WA&quot;, 0);</span>
+<span class="fc" id="L20">            taxCalculatorSpy.addSalesRate(&quot;AR&quot;, 6.5);</span>
+<span class="fc" id="L21">            taxCalculatorSpy.addGroceryRate(&quot;AR&quot;, 1.5);</span>
+<span class="fc" id="L22">            return true;</span>
+        });
+<span class="fc" id="L24">        taxCalculatorSpy.addTaxValues(&quot;path&quot;);</span>
+<span class="fc" id="L25">    }</span>
+
+    @Test
+    void calculateTotalCost_invalid_category() {
+<span class="fc" id="L29">        String state = &quot;WA&quot;;</span>
+<span class="fc" id="L30">        double initialCost = 10;</span>
+<span class="fc" id="L31">        String category = &quot;Fake Category&quot;;</span>
+<span class="fc" id="L32">        double actualCost = taxCalculatorSpy.calculateTotalCost(initialCost, state, category);</span>
+<span class="fc" id="L33">        assertEquals(initialCost, actualCost);</span>
+<span class="fc" id="L34">    }</span>
+
+
+    @Test
+    void calculateTotalCost_valid_category_groceries() {
+<span class="fc" id="L39">        String state = &quot;AR&quot;;</span>
+<span class="fc" id="L40">        double initialCost = 10;</span>
+<span class="fc" id="L41">        String category = &quot;Groceries&quot;;</span>
+<span class="fc" id="L42">        double expectedCost = 10.15;</span>
+<span class="fc" id="L43">        double actualCost = taxCalculatorSpy.calculateTotalCost(initialCost, state, category);</span>
+<span class="fc" id="L44">        assertEquals(expectedCost, actualCost, &quot;Actual cost = &quot; + actualCost + &quot; vs. Expected cost = &quot; + expectedCost);</span>
+<span class="fc" id="L45">    }</span>
+
+    @Test
+    void calculateTotalCost_valid_category_sales() {
+<span class="fc" id="L49">        String state = &quot;AR&quot;;</span>
+<span class="fc" id="L50">        double initialCost = 10;</span>
+<span class="fc" id="L51">        String category = &quot;Entertainment&quot;;</span>
+<span class="fc" id="L52">        double expectedCost = 10.65;</span>
+<span class="fc" id="L53">        double actualCost = taxCalculatorSpy.calculateTotalCost(initialCost, state, category);</span>
+<span class="fc" id="L54">        assertEquals(expectedCost, actualCost, &quot;Actual cost = &quot; + actualCost + &quot; vs. Expected cost = &quot; + expectedCost);</span>
+<span class="fc" id="L55">    }</span>
+
+    @Test
+    void calculateTotalCost_other_category() {
+<span class="fc" id="L59">        String state = &quot;WA&quot;;</span>
+<span class="fc" id="L60">        double initialCost = 500;</span>
+<span class="fc" id="L61">        String category = &quot;Auto&quot;;</span>
+<span class="fc" id="L62">        double actualCost = taxCalculatorSpy.calculateTotalCost(initialCost, state, category);</span>
+<span class="fc" id="L63">        assertEquals(initialCost, actualCost);</span>
+<span class="fc" id="L64">    }</span>
+
+    @Test
+    void invalid_state() {
+<span class="fc" id="L68">        String state = &quot;XX&quot;;</span>
+<span class="fc" id="L69">        double initialCost = 500;</span>
+<span class="fc" id="L70">        String category = &quot;Groceries&quot;;</span>
+<span class="fc" id="L71">        double actualCost = taxCalculatorSpy.calculateTotalCost(initialCost, state, category);</span>
+<span class="fc" id="L72">        assertEquals(initialCost, actualCost);</span>
+<span class="fc" id="L73">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

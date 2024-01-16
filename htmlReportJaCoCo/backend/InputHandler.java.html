@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InputHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in MoneyManager Coverage Results</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">InputHandler.java</span></div><h1>InputHandler.java</h1><pre class="source lang-java linenums">package backend;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * This class handles validating and editing input to be usable by the GUI and backend
+ */
+<span class="fc" id="L10">public class InputHandler {</span>
+
+    /**
+     * Checks if a string value is a double
+     *
+     * @param str string value to be tested
+     * @return true if double, false if not
+     */
+    public static boolean isValidDouble(String str) {
+        try {
+<span class="fc" id="L20">            Double.parseDouble(str);</span>
+<span class="fc" id="L21">            return true;</span>
+<span class="fc" id="L22">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L23">            return false;</span>
+        }
+    }
+
+    /**
+     * Formats a double to have two cent places
+     *
+     * @param value double
+     * @return formatted double string
+     */
+    public static String formatDoubles(double value) {
+<span class="fc" id="L34">        return String.format(&quot;%.2f&quot;, value);</span>
+    }
+
+    /**
+     * Checks if a string value is an integer
+     *
+     * @param str string value to be tested
+     * @return true if integer, false if not
+     */
+    public static boolean isValidInt(String str) {
+        try {
+<span class="fc" id="L45">            Integer.parseInt(str);</span>
+<span class="fc" id="L46">            return true;</span>
+<span class="fc" id="L47">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L48">            return false;</span>
+        }
+    }
+
+    /**
+     * Determines if a string is in a valid date format (MM/DD/YYYY)
+     *
+     * @param str string date to be tested
+     * @return the Date object if valid, null if not
+     */
+    public static Date isValidDate(String str) {
+        try {
+<span class="fc" id="L60">            SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;MM/dd/yyyy&quot;);</span>
+<span class="fc" id="L61">            return dateFormat.parse(str);</span>
+<span class="fc" id="L62">        } catch (ParseException e) {</span>
+<span class="fc" id="L63">            return null;</span>
+        }
+    }
+
+    /**
+     * appends an 1-D array onto a 2-D array
+     *
+     * @param originalArray 2-D array
+     * @param toAppend      1-D array
+     * @return newly made 2-D array
+     */
+    public static String[][] appendToArray(String[][] originalArray, String[] toAppend) {
+<span class="fc" id="L75">        String[][] newArray = new String[originalArray.length + 1][];</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (int i = 0; i &lt; originalArray.length; i++) {</span>
+<span class="fc" id="L78">            newArray[i] = originalArray[i].clone();</span>
+        }
+
+<span class="fc" id="L81">        newArray[newArray.length - 1] = toAppend;</span>
+
+<span class="fc" id="L83">        return newArray;</span>
+    }
+
+    /**
+     * Checks that the household size makes sense.
+     *
+     * @param size the number of people in a household.
+     * @return if the household size is a valid number.
+     */
+    public static Boolean validHouseholdSize(String size) {
+<span class="fc" id="L93">        int num = 0;</span>
+        try {
+<span class="fc" id="L95">            num = Integer.parseInt(size);</span>
+<span class="fc" id="L96">        } catch (Exception e) {</span>
+<span class="fc" id="L97">            return false;</span>
+<span class="fc" id="L98">        }</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        return num &gt; 0;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
